@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Todolist Manager</title>
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container mt-4">
+    </br>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="New Task">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+    </br>      
+        
+        
+        <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Done</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for obj in all_tasks %}
+                    
+                    {% if obj.done %}
+                        <tr class="table-success">     
+                            <td>{{ obj.task }}</td>
+                            <td>Completed</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ obj.task }}</td>
+                            <td>Not Completed</td>
+                            <td>Edit</td>
+                            <td>Delete</td>
+                        </tr>
+                
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+        </table>              
+    </div>
+{% endblock content %}
+
+
